@@ -3,10 +3,11 @@
 ### Yo
 
 ### Data clean
-- last
-- -
-- country
-
+Actually the data cleaning process was amostly done in the _Data source_ section, still there are several things to deal with:
+- the release days are negative before the release date, and those items should be eliminated while their box offices added to the next item.
+- the countries of film are in chaos, therefore the nationality are determined according to the production company and director.
+wow:
+hhhyou
 
 ### Data source
 - __main data__: [中国票房](http://www.cbooo.cn/year)<br>
