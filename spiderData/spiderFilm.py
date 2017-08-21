@@ -35,7 +35,7 @@ def getToplist():
     url = 'http://www.cbooo.cn/'
     s = requests.session()
 
-    for y in range(2008, 2018):
+    for y in range(2017, 2018):
 
         print('年份进度：', y)
         time.sleep(0.745 * random.random())
