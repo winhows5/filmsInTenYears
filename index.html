@@ -222,7 +222,7 @@
                     return y(d.temperature);
                 });
 
-            d3.tsv("/data/datamonths.csv", type, function(error, data) {
+            d3.tsv("data/datamonths.csv", type, function(error, data) {
                 if (error) throw error;
 
                 var cities = data.columns.slice(1).map(function(id) {
