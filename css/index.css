@@ -34,7 +34,7 @@ body {
     z-index: -1;
     width: 100%;
     height: 64px;
-    background: url(/img/hd_bg.jpg) 0 0 repeat-x;
+    background: url(img/hd_bg.jpg) 0 0 repeat-x;
 }
 
 .window-hd h1 {
