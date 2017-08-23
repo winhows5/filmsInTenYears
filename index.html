@@ -1,49 +1,291 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Winhows5">
+    <meta name="copyright" content="©2009-2017 Winhows5. All rights reserved.">
+    <title>FilmsInTenYears</title>
+    <link rel="icon" href="/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <link rel="stylesheet" href="css/index.css">
 
-    <title>Film in Ten Years</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <style>
-        a {
-            position: relative;
-            display: inline-block;
-            outline: none;
-            text-decoration: none;
-            color: #000;
-            font-size: 32px;
-            padding: 5px 10px;
-        }
-        
-        a:hover::before {
-            position: absolute;
-            content: "\5B";
-            left: -10px;
-        }
-        
-        a:hover::after {
-            position: absolute;
-            content: "\5D";
-            right: -10px;
-        }
-    </style>
 </head>
 
 <body>
+    <div id="window">
+        <div class="section section1">
+            <div class="bg"> </div>
+        </div>
+        <div class="section section2">
+            <div class="inner">
+                <p id="p1">The <i>Wolf Warriors Ⅱ</i> fiery patriotism ignited a collective release, at the same time people also cheered the domestic film breakthrough. We would like to take this opportunity to objectively judge the development of China's film
+                    box office market from the data.<br> In the past ten years, domestic box office and non-domestic box office were shown on the left chart --box office by year.In spite of the increase in the amount, the proportion of domestic films
+                    did not increase significantly on the ten year scale.<br> (data source:cbooo.cn, IMDb)</p>
+                <p id="p2"></p>
+            </div>
+        </div>
 
-    <div id="main" style="width: 100%;height: 180px;background-color: gray;">
-        <p style="font-family: cursive;font-size: 40px;text-align: center;color: coral;z-index: 50">films for ten years
-        </p>
+        <div class="section section3">
+            <div class="inner">
+                <p id="p1">Many people question that some film introduction policies will unduly increase the proportion of domestic film box office, for example, known as the "domestic film protection month."". But as you can see from the chart, even after the
+                    decline in box office prices for non Chinese movies in the summer, the box office will continue to rise rapidly, with a slight decline in the domestic movie box office.<br>(data source:cbooo.cn, IMDb)</p>
+                <p id="p2"></p>
+            </div>
+        </div>
+        <div class="section section4">
+            <div class="inner">
+                <p id="p1">Some mistakes still exist.<br></p>
+                <p id="p2"></p>
+            </div>
+        </div>
     </div>
 
-    <div style="width: 100%;height: 180px;background-color: gray;">
-        <a href="">hhh</a>
-    </div>
 
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        $(function() {
+            $('#window').fullpage({
+                navigation: false
+            });
+        });
+    </script>
+    <script>
+        width = 700
+        height = 450
+        var svg = d3.select(".section2 .inner").append("svg")
+            .attr("width", width)
+            .attr("height", height),
+            margin = {
+                top: 90,
+                right: 80,
+                bottom: 30,
+                left: 140
+            },
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom,
+            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var x = d3.scaleBand()
+            .rangeRound([0, width])
+            .paddingInner(0.2)
+            .align(0.1);
+
+        var y = d3.scaleLinear()
+            .rangeRound([height, 0]);
+
+        var z = d3.scaleOrdinal()
+            .range(["#ff8c00", "#6b486b", "#98abc5"]);
+
+        d3.csv("/data/datayears.csv", function(error, data) {
+            if (error) throw error;
+
+            // var keys = data.columns.slice(2);
+            var keys = ["China", "foreign"]
+            x.domain(data.map(function(d) {
+                return d.year;
+            }));
+            // y.domain([d3.min(data, function(d) {
+            //     return +d.China * 1.0;
+            // }), d3.max(data, function(d) {
+            //     return d.foreign * 1.0;
+            // })]).nice();
+            y.domain([0, 2 * d3.max(data, function(d) {
+                return d.foreign * 1.0;
+            })]).nice();
+            z.domain(keys);
+            g.append("g")
+                .selectAll("g")
+                .data(d3.stack().keys(keys)(data))
+                .enter().append("g")
+                .attr("fill", function(d) {
+                    return z(d.key);
+                })
+                .selectAll("rect")
+                .data(function(d) {
+                    return d;
+                })
+                .enter().append("rect")
+                .attr("x", function(d) {
+                    return x(d.data.year);
+                })
+                .attr("y", function(d) {
+                    return y(+d[1]);
+                })
+                .attr("height", function(d) {
+                    return (y(+d[0]) - y(+d[1]));
+                })
+                .attr("width", 20);
+
+            g.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x))
+                .attr("stroke", "#bfbfbf");
+
+            g.append("g")
+                .attr("class", "axis")
+                .attr("stroke", "#bfbfbf")
+                .call(d3.axisLeft(y).ticks(null, "s"))
+                .append("text")
+                .attr("x", 2)
+                .attr("y", y(y.ticks().pop()) + 0.5)
+                .attr("dy", "0.32em")
+                .attr("fill", "#cccccc")
+                .attr("text-anchor", "start")
+                .text("Box office");
+
+            var legend = g.append("g")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", 12)
+                .attr("text-anchor", "end")
+                .selectAll("g")
+                .data(keys.slice().reverse())
+                .enter().append("g")
+                .attr("transform", function(d, i) {
+                    return "translate(" + 50 + "," + i * 30 + ")";
+                });
+
+            legend.append("rect")
+                .attr("x", width - 19)
+                .attr("y", 20)
+                .attr("width", 19)
+                .attr("height", 19)
+                .attr("fill", z);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 29)
+                .attr("dy", "0.32em")
+                .attr("fill", "#bfbfbf")
+                .text(function(d) {
+                    return d;
+                });
+        });
+    </script>
+
+    <script>
+        var svg2 = d3.select(".section3 .inner").append("svg")
+            .attr("width", 960)
+            .attr("height", 500),
+            margin = {
+                top: 20,
+                right: 80,
+                bottom: 30,
+                left: 50
+            },
+            width = svg2.attr("width") - margin.left - margin.right,
+            height = svg2.attr("height") - margin.top - margin.bottom,
+            g2 = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var parseTime = d3.timeParse("%Y%m%d");
+
+        var x = d3.scaleTime().range([0, width]),
+            y = d3.scaleLinear().range([height, 0]),
+            z = d3.scaleOrdinal(d3.schemeCategory10);
+
+        var line = d3.line()
+            .curve(d3.curveBasis)
+            .x(function(d) {
+                return x(d.date);
+            })
+            .y(function(d) {
+                return y(d.temperature);
+            });
+
+        d3.tsv("/data/datamonths.csv", type, function(error, data) {
+            if (error) throw error;
+
+            var cities = data.columns.slice(1).map(function(id) {
+                return {
+                    id: id,
+                    values: data.map(function(d) {
+                        return {
+                            date: d.date,
+                            temperature: d[id]
+                        };
+                    })
+                };
+            });
+
+            x.domain(d3.extent(data, function(d) {
+                return d.date;
+            }));
+
+            y.domain([
+                d3.min(cities, function(c) {
+                    return d3.min(c.values, function(d) {
+                        return d.temperature;
+                    });
+                }),
+                d3.max(cities, function(c) {
+                    return d3.max(c.values, function(d) {
+                        return d.temperature;
+                    });
+                })
+            ]);
+
+            z.domain(cities.map(function(c) {
+                return c.id;
+            }));
+
+            g2.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            g2.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y))
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("fill", "#000")
+                .text("Temperature, ºF");
+
+            var city = g2.selectAll(".city")
+                .data(cities)
+                .enter().append("g")
+                .attr("class", "city");
+
+            city.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) {
+                    return line(d.values);
+                })
+                .style("stroke", function(d) {
+                    return z(d.id);
+                });
+
+            city.append("text")
+                .datum(function(d) {
+                    return {
+                        id: d.id,
+                        value: d.values[d.values.length - 1]
+                    };
+                })
+                .attr("transform", function(d) {
+                    return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
+                })
+                .attr("x", 3)
+                .attr("dy", "0.35em")
+                .style("font", "10px sans-serif")
+                .text(function(d) {
+                    return d.id;
+                });
+        });
+
+        function type(d, _, columns) {
+            d.date = parseTime(d.date);
+            for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+            return d;
+        }
+    </script>
 
 
 </body>
