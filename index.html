@@ -29,9 +29,9 @@
 
         <div class="section section3">
             <div class="inner">
-                <p id="p1">Many people question that some film introduction policies will unduly increase the proportion of domestic film box office, for example, known as the "domestic film protection month."". But as you can see from the chart, even after the
+                <!-- <p id="p1">Many people question that some film introduction policies will unduly increase the proportion of domestic film box office, for example, known as the "domestic film protection month."". But as you can see from the chart, even after the
                     decline in box office prices for non Chinese movies in the summer, the box office will continue to rise rapidly, with a slight decline in the domestic movie box office.<br>(data source:cbooo.cn, IMDb)</p>
-                <p id="p2"></p>
+                <p id="p2"></p> -->
             </div>
         </div>
         <div class="section section4">
@@ -55,236 +55,262 @@
         });
     </script>
     <script>
-        width = 700
-        height = 450
-        var svg = d3.select(".section2 .inner").append("svg")
-            .attr("width", width)
-            .attr("height", height),
-            margin = {
-                top: 90,
-                right: 80,
-                bottom: 30,
-                left: 140
-            },
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom,
-            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        $(function() {
+            width = 700
+            height = 450
+            var svg = d3.select(".section2 .inner").append("svg")
+                .attr("id", "svg1")
+                .attr("width", width)
+                .attr("height", height),
+                margin = {
+                    top: 90,
+                    right: 80,
+                    bottom: 30,
+                    left: 140
+                },
+                width = +svg.attr("width") - margin.left - margin.right,
+                height = +svg.attr("height") - margin.top - margin.bottom,
+                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var x = d3.scaleBand()
-            .rangeRound([0, width])
-            .paddingInner(0.2)
-            .align(0.1);
+            var x = d3.scaleBand()
+                .rangeRound([0, width])
+                .paddingInner(0.2)
+                .align(0.1);
 
-        var y = d3.scaleLinear()
-            .rangeRound([height, 0]);
+            var y = d3.scaleLinear()
+                .rangeRound([height, 0]);
 
-        var z = d3.scaleOrdinal()
-            .range(["#ff8c00", "#6b486b", "#98abc5"]);
+            var z = d3.scaleOrdinal()
+                .range(["#ff8c00", "#6b486b", "#98abc5"]);
 
-        d3.csv("/data/datayears.csv", function(error, data) {
-            if (error) throw error;
+            d3.csv("/data/datayears.csv", function(error, data) {
+                if (error) throw error;
 
-            // var keys = data.columns.slice(2);
-            var keys = ["China", "foreign"]
-            x.domain(data.map(function(d) {
-                return d.year;
-            }));
-            // y.domain([d3.min(data, function(d) {
-            //     return +d.China * 1.0;
-            // }), d3.max(data, function(d) {
-            //     return d.foreign * 1.0;
-            // })]).nice();
-            y.domain([0, 2 * d3.max(data, function(d) {
-                return d.foreign * 1.0;
-            })]).nice();
-            z.domain(keys);
-            g.append("g")
-                .selectAll("g")
-                .data(d3.stack().keys(keys)(data))
-                .enter().append("g")
-                .attr("fill", function(d) {
-                    return z(d.key);
-                })
-                .selectAll("rect")
-                .data(function(d) {
-                    return d;
-                })
-                .enter().append("rect")
-                .attr("x", function(d) {
-                    return x(d.data.year);
-                })
-                .attr("y", function(d) {
-                    return y(+d[1]);
-                })
-                .attr("height", function(d) {
-                    return (y(+d[0]) - y(+d[1]));
-                })
-                .attr("width", 20);
+                var keys = data.columns.slice(2);
 
-            g.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x))
-                .attr("stroke", "#bfbfbf");
+                x.domain(data.map(function(d) {
+                    return d.year;
+                }));
 
-            g.append("g")
-                .attr("class", "axis")
-                .attr("stroke", "#bfbfbf")
-                .call(d3.axisLeft(y).ticks(null, "s"))
-                .append("text")
-                .attr("x", 2)
-                .attr("y", y(y.ticks().pop()) + 0.5)
-                .attr("dy", "0.32em")
-                .attr("fill", "#cccccc")
-                .attr("text-anchor", "start")
-                .text("Box office");
+                y.domain([-d3.max(data, function(d) {
+                    return d.foreign * 1.0;
+                }), d3.max(data, function(d) {
+                    return d.foreign * 1.0;
+                })]).nice();
+                z.domain(keys);
+                g.append("g")
+                    .selectAll("g")
+                    .data(d3.stack().keys(keys)(data))
+                    .enter().append("g")
+                    .attr("fill", function(d) {
+                        return z(d.key);
+                    })
+                    .selectAll("rect")
+                    .data(function(d) {
+                        return d;
+                    })
+                    .enter().append("rect")
+                    .attr("x", function(d) {
+                        return x(d.data.year);
+                    })
+                    .attr("y", function(d) {
+                        return y(+d[1]);
+                    })
+                    .attr("height", function(d) {
+                        return (y(+d[0]) - y(+d[1]));
+                    })
+                    .attr("width", 20);
+                var keys2 = data.columns.slice(1, 2);
+                d3.select("#svg1 g").append("g")
+                    .selectAll("g")
+                    .data(d3.stack().keys(keys2)(data))
+                    .enter().append("g")
+                    .attr("fill", function(d) {
+                        return z(d.key);
+                    })
+                    .selectAll("rect")
+                    .data(function(d) {
+                        return d;
+                    })
+                    .enter().append("rect")
+                    .attr("x", function(d) {
+                        return x(d.data.year);
+                    })
+                    .attr("y", function(d) {
+                        return y(0);
+                    })
+                    .attr("height", function(d) {
+                        return (y(-d[1]) - y(d[0]));
+                    })
+                    .attr("width", 20);
 
-            var legend = g.append("g")
-                .attr("font-family", "sans-serif")
-                .attr("font-size", 12)
-                .attr("text-anchor", "end")
-                .selectAll("g")
-                .data(keys.slice().reverse())
-                .enter().append("g")
-                .attr("transform", function(d, i) {
-                    return "translate(" + 50 + "," + i * 30 + ")";
-                });
+                g.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x))
+                    .attr("stroke", "#bfbfbf");
 
-            legend.append("rect")
-                .attr("x", width - 19)
-                .attr("y", 20)
-                .attr("width", 19)
-                .attr("height", 19)
-                .attr("fill", z);
+                g.append("g")
+                    .attr("class", "axis")
+                    .attr("stroke", "#bfbfbf")
+                    .call(d3.axisLeft(y).ticks(null, "s"))
+                    .append("text")
+                    .attr("x", 2)
+                    .attr("y", y(y.ticks().pop()) + 0.5)
+                    .attr("dy", "0.32em")
+                    .attr("fill", "#cccccc")
+                    .attr("text-anchor", "start")
+                    .text("Box office");
 
-            legend.append("text")
-                .attr("x", width - 24)
-                .attr("y", 29)
-                .attr("dy", "0.32em")
-                .attr("fill", "#bfbfbf")
-                .text(function(d) {
-                    return d;
-                });
-        });
+                var legend = g.append("g")
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", 12)
+                    .attr("text-anchor", "end")
+                    .selectAll("g")
+                    .data(keys.concat(keys2).slice().reverse())
+                    .enter().append("g")
+                    .attr("transform", function(d, i) {
+                        return "translate(" + 80 + "," + (i * 30) + ")";
+                    });
+
+                legend.append("rect")
+                    .attr("x", width - 19)
+                    .attr("y", 20)
+                    .attr("width", 19)
+                    .attr("height", 19)
+                    .attr("fill", z);
+
+                legend.append("text")
+                    .attr("x", width - 24)
+                    .attr("y", 29)
+                    .attr("dy", "0.32em")
+                    .attr("fill", "#bfbfbf")
+                    .text(function(d) {
+                        return d;
+                    });
+            });
+        })
     </script>
 
     <script>
-        var svg2 = d3.select(".section3 .inner").append("svg")
-            .attr("width", 960)
-            .attr("height", 500),
-            margin = {
-                top: 20,
-                right: 80,
-                bottom: 30,
-                left: 50
-            },
-            width = svg2.attr("width") - margin.left - margin.right,
-            height = svg2.attr("height") - margin.top - margin.bottom,
-            g2 = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        $(function() {
+            var svg2 = d3.select(".section3 .inner").append("svg")
+                .attr("width", 960)
+                .attr("height", 500),
+                margin = {
+                    top: 20,
+                    right: 80,
+                    bottom: 30,
+                    left: 50
+                },
+                width = svg2.attr("width") - margin.left - margin.right,
+                height = svg2.attr("height") - margin.top - margin.bottom,
+                g2 = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var parseTime = d3.timeParse("%Y%m%d");
+            var parseTime = d3.timeParse("%Y%m%d");
 
-        var x = d3.scaleTime().range([0, width]),
-            y = d3.scaleLinear().range([height, 0]),
-            z = d3.scaleOrdinal(d3.schemeCategory10);
+            var x = d3.scaleTime().range([0, width]),
+                y = d3.scaleLinear().range([height, 0]),
+                z = d3.scaleOrdinal(d3.schemeCategory10);
 
-        var line = d3.line()
-            .curve(d3.curveBasis)
-            .x(function(d) {
-                return x(d.date);
-            })
-            .y(function(d) {
-                return y(d.temperature);
-            });
+            var line = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d.temperature);
+                });
 
-        d3.tsv("/data/datamonths.csv", type, function(error, data) {
-            if (error) throw error;
+            d3.tsv("/data/datamonths.csv", type, function(error, data) {
+                if (error) throw error;
 
-            var cities = data.columns.slice(1).map(function(id) {
-                return {
-                    id: id,
-                    values: data.map(function(d) {
+                var cities = data.columns.slice(1).map(function(id) {
+                    return {
+                        id: id,
+                        values: data.map(function(d) {
+                            return {
+                                date: d.date,
+                                temperature: d[id]
+                            };
+                        })
+                    };
+                });
+
+                x.domain(d3.extent(data, function(d) {
+                    return d.date;
+                }));
+
+                y.domain([
+                    d3.min(cities, function(c) {
+                        return d3.min(c.values, function(d) {
+                            return d.temperature;
+                        });
+                    }),
+                    d3.max(cities, function(c) {
+                        return d3.max(c.values, function(d) {
+                            return d.temperature;
+                        });
+                    })
+                ]);
+
+                z.domain(cities.map(function(c) {
+                    return c.id;
+                }));
+
+                g2.append("g")
+                    .attr("class", "axis axis--x")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x));
+
+                g2.append("g")
+                    .attr("class", "axis axis--y")
+                    .call(d3.axisLeft(y))
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 6)
+                    .attr("dy", "0.71em")
+                    .attr("fill", "#000")
+                    .text("Temperature, ºF");
+
+                var city = g2.selectAll(".city")
+                    .data(cities)
+                    .enter().append("g")
+                    .attr("class", "city");
+
+                city.append("path")
+                    .attr("class", "line")
+                    .attr("d", function(d) {
+                        return line(d.values);
+                    })
+                    .style("stroke", function(d) {
+                        return z(d.id);
+                    });
+
+                city.append("text")
+                    .datum(function(d) {
                         return {
-                            date: d.date,
-                            temperature: d[id]
+                            id: d.id,
+                            value: d.values[d.values.length - 1]
                         };
                     })
-                };
+                    .attr("transform", function(d) {
+                        return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
+                    })
+                    .attr("x", 3)
+                    .attr("dy", "0.35em")
+                    .style("font", "10px sans-serif")
+                    .text(function(d) {
+                        return d.id;
+                    });
             });
 
-            x.domain(d3.extent(data, function(d) {
-                return d.date;
-            }));
-
-            y.domain([
-                d3.min(cities, function(c) {
-                    return d3.min(c.values, function(d) {
-                        return d.temperature;
-                    });
-                }),
-                d3.max(cities, function(c) {
-                    return d3.max(c.values, function(d) {
-                        return d.temperature;
-                    });
-                })
-            ]);
-
-            z.domain(cities.map(function(c) {
-                return c.id;
-            }));
-
-            g2.append("g")
-                .attr("class", "axis axis--x")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-
-            g2.append("g")
-                .attr("class", "axis axis--y")
-                .call(d3.axisLeft(y))
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", "0.71em")
-                .attr("fill", "#000")
-                .text("Temperature, ºF");
-
-            var city = g2.selectAll(".city")
-                .data(cities)
-                .enter().append("g")
-                .attr("class", "city");
-
-            city.append("path")
-                .attr("class", "line")
-                .attr("d", function(d) {
-                    return line(d.values);
-                })
-                .style("stroke", function(d) {
-                    return z(d.id);
-                });
-
-            city.append("text")
-                .datum(function(d) {
-                    return {
-                        id: d.id,
-                        value: d.values[d.values.length - 1]
-                    };
-                })
-                .attr("transform", function(d) {
-                    return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
-                })
-                .attr("x", 3)
-                .attr("dy", "0.35em")
-                .style("font", "10px sans-serif")
-                .text(function(d) {
-                    return d.id;
-                });
+            function type(d, _, columns) {
+                d.date = parseTime(d.date);
+                for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+                return d;
+            }
         });
-
-        function type(d, _, columns) {
-            d.date = parseTime(d.date);
-            for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
-            return d;
-        }
     </script>
 
 
