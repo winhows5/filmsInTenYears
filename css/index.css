@@ -1,15 +1,15 @@
 @font-face {
     font-family: 'bodonixt';
-    src: url('/fonts/bodonixt.eot');
-    src: url('/fonts/bodonixt.eot?#iefix') format('embedded-opentype'), url('/fonts/bodonixt.woff') format('woff'), url('/fonts/bodonixt.ttf') format('truetype');
+    src: url('fonts/bodonixt.eot');
+    src: url('fonts/bodonixt.eot?#iefix') format('embedded-opentype'), url('fonts/bodonixt.woff') format('woff'), url('fonts/bodonixt.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'bodonitown';
-    src: url('/fonts/bodonitown.eot');
-    src: url('/fonts/bodonitown.eot?#iefix') format('embedded-opentype'), url('/fonts/bodonitown.woff') format('woff'), url('/fonts/bodonitown.ttf') format('truetype');
+    src: url('fonts/bodonitown.eot');
+    src: url('fonts/bodonitown.eot?#iefix') format('embedded-opentype'), url('fonts/bodonitown.woff') format('woff'), url('fonts/bodonitown.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
