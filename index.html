@@ -83,7 +83,7 @@
             var z = d3.scaleOrdinal()
                 .range(["#ff8c00", "#6b486b", "#98abc5"]);
 
-            d3.csv("/data/datayears.csv", function(error, data) {
+            d3.csv("data/datayears.csv", function(error, data) {
                 if (error) throw error;
 
                 var keys = data.columns.slice(2);
