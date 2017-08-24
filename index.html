@@ -727,6 +727,37 @@
                     .attr("stroke-linecap", "round")
                     .attr("stroke-width", 1.5)
                     .attr("d", line9);
+
+
+                var legendLine = g.append("g")
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", 12)
+                    .attr("text-anchor", "end")
+                    .selectAll("g")
+                    .data(["all films", "foreign films"])
+                    .enter().append("g")
+                    .attr("transform", function(d, i) {
+                        return "translate(" + 0 + "," + (i * 30 + 90) + ")";
+                    });
+
+                legendLine.append("rect")
+                    .attr("x", width - 19)
+                    .attr("y", 28)
+                    .attr("width", 19)
+                    .attr("height", 2)
+                    .attr("fill", function(d) {
+                        if (d == "all films") return "#00eeee";
+                        else return "#eeeebb";
+                    });
+
+                legendLine.append("text")
+                    .attr("x", width - 24)
+                    .attr("y", 29)
+                    .attr("dy", "0.32em")
+                    .attr("fill", "#bfbfbf")
+                    .text(function(d) {
+                        return d;
+                    });
             });
         });
     </script>
