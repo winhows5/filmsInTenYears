@@ -25,21 +25,29 @@
         </div>
         <div class="section section2">
             <div class="inner">
-                <p id="p1">The <i>Wolf Warriors Ⅱ</i> fiery patriotism ignited a collective release, at the same time people also cheered the domestic film breakthrough. We would like to take this opportunity to objectively judge the development of China's film
-                    box office market from the data.<br> In the past ten years, domestic box office and non-domestic box office were shown on the left chart --box office by year.In spite of the increase in the amount, the proportion of domestic films
-                    did not increase significantly on the ten year scale.<br> (data source:cbooo.cn, IMDb)</p>
-                <p id="p2"></p>
+                <p id="p1">In the past ten years, numerous outstanding domestic and foreign films have sprung up in the Chinese film market. In order to observe the characteristics of the movie market, the chart was drawn to show the box office per ten days of every
+                    film in every year between 2008 to 2017(data source:cbooo.cn, IMDb.com). As a whole, the box office market shows obvious periodicity and growth trend. More details will be discussed below.<br>(It should be noted that the data for 2017
+                    ended August 20th)</p>
             </div>
         </div>
 
         <div class="section section3">
+            <div class="inner">
+                <p id="p1">The <i>Wolf Warriors Ⅱ</i> fiery patriotism ignited a collective release, at the same time people also cheered the domestic film breakthrough. We would like to take this opportunity to objectively judge the development of China's film
+                    box office market from the data.<br> In the past ten years, domestic box office and non-domestic box office were shown on the left chart --box office by year.In spite of the increase in the amount, the proportion of domestic films
+                    did not increase significantly on the ten year scale.<br> (data source:cbooo.cn, IMDb.com)</p>
+                <p id="p2"></p>
+            </div>
+        </div>
+
+        <div class="section section4">
             <div class="inner">
                 <!-- <p id="p1">Many people question that some film introduction policies will unduly increase the proportion of domestic film box office, for example, known as the "domestic film protection month."". But as you can see from the chart, even after the
                     decline in box office prices for non Chinese movies in the summer, the box office will continue to rise rapidly, with a slight decline in the domestic movie box office.<br>(data source:cbooo.cn, IMDb)</p>
                 <p id="p2"></p> -->
             </div>
         </div>
-        <div class="section section4">
+        <div class="section section5">
             <div class="inner">
                 <p id="p1">Some mistakes still exist.<br></p>
                 <p id="p2"></p>
@@ -54,11 +62,134 @@
             });
         });
     </script>
+
+    <script>
+        $(function() {
+            width = 1400
+            height = 560
+            var svg = d3.select(".section2 .inner").append("svg")
+                .attr("id", "svg0")
+                .attr("width", width)
+                .attr("height", height),
+                margin = {
+                    top: 30,
+                    right: 100,
+                    bottom: 30,
+                    left: 100
+                },
+                width = +svg.attr("width") - margin.left - margin.right,
+                height = +svg.attr("height") - margin.top - margin.bottom,
+                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var parseTime = d3.timeParse("%Y-%m-%d");
+            var x = d3.scaleTime()
+                .rangeRound([0, width])
+
+            var y = d3.scaleLinear()
+                .rangeRound([height, 0]);
+
+            var z = d3.scaleOrdinal()
+                .range(["#6699ff", "#6b486b", "#98abc5", "#ccff66", "#CDAF95", "#E9967A", "#6b486b", "#6b486b", "#6b486b"]);
+
+            d3.csv("data/dataF.csv", function(d) {
+                d.date = parseTime(d.date);
+                return d;
+            }, function(error, data) {
+                if (error) throw error;
+                var keys = data.columns.slice(1);
+                x.domain(d3.extent(data, function(d) {
+                    return d.date;
+                }));
+                y.domain([-300000, +300000]);
+                z.domain(keys);
+                g.append("g")
+                    .selectAll("g")
+                    .data(d3.stack().keys(keys)(data))
+                    .enter().append("g")
+                    .attr("fill", function(d) {
+                        return z(d.key);
+                    })
+                    .selectAll("rect")
+                    .data(function(d) {
+                        console.log(d)
+                        return d;
+                    })
+                    .enter().append("rect")
+                    .attr("x", function(d) {
+                        return x(d.data.date);
+                    })
+                    .attr("y", function(d) {
+                        return y(1 + d[1]);
+                    })
+                    .attr("height", function(d) {
+                        return (y(1 + d[0]) - y(1 + d[1]));
+                    })
+                    .attr("width", 1.5);
+
+                g.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x))
+                    .attr("stroke", "#cfcfcf")
+                    .select('.domain')
+                    .remove();
+
+                g.append("g")
+                    .attr("class", "axis")
+                    .attr("stroke", "#cfcfcf")
+                    .call(d3.axisLeft(y).ticks(null, "s"))
+                    .append("text")
+                    .attr("x", 2)
+                    .attr("y", y(y.ticks().pop()) + 0.5)
+                    .attr("dy", "0.32em")
+                    .attr("fill", "#cccccc")
+                    .attr("text-anchor", "start")
+                    .text("Box office(¥10,000)");
+            })
+
+            var z2 = d3.scaleOrdinal()
+                .range(["#ff8c00", "#ffcc66", "#ffffcc"]);
+            d3.csv("data/dataC.csv", function(d) {
+                d.date = parseTime(d.date);
+                return d;
+            }, function(error, data) {
+                if (error) throw error;
+                var keys = data.columns.slice(1);
+                x.domain(d3.extent(data, function(d) {
+                    return d.date;
+                }));
+                y.domain([-300000, +300000]);
+                z2.domain(keys);
+                d3.select("#svg0 g").append("g")
+                    .selectAll("g")
+                    .data(d3.stack().keys(keys)(data))
+                    .enter().append("g")
+                    .attr("fill", function(d) {
+                        return z2(d.key);
+                    })
+                    .selectAll("rect")
+                    .data(function(d) {
+                        return d;
+                    })
+                    .enter().append("rect")
+                    .attr("x", function(d) {
+                        return x(d.data.date);
+                    })
+                    .attr("y", function(d) {
+                        return y(-1 - d[1]) - (y(1 + d[0]) - y(1 + d[1]));
+                    })
+                    .attr("height", function(d) {
+                        return (y(1 + d[0]) - y(1 + d[1]));
+                    })
+                    .attr("width", 1);
+            })
+        })
+    </script>
     <script>
         $(function() {
             width = 800
             height = 450
-            var svg = d3.select(".section2 .inner").append("svg")
+            var svg = d3.select(".section3 .inner").append("svg")
                 .attr("id", "svg1")
                 .attr("width", width)
                 .attr("height", height),
@@ -84,7 +215,7 @@
                 .rangeRound([height, 0]);
 
             var z = d3.scaleOrdinal()
-                .range(["#ff8c00", "#6b486b", "#98abc5"]);
+                .range(["#6b486b", "#ff8c00", "#98abc5"]);
 
             var line = d3.line()
                 .x(function(d) {
@@ -274,7 +405,7 @@
 
     <script>
         $(function() {
-            var svg2 = d3.select(".section3 .inner").append("svg")
+            var svg2 = d3.select(".section4 .inner").append("svg")
                 .attr("width", 960)
                 .attr("height", 500),
                 margin = {
