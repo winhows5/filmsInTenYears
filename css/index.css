@@ -161,7 +161,7 @@ body {
 
 #window .section4 #p1 {
     position: absolute;
-    top: -60px;
+    top: -100px;
     right: 40px;
     width: 400px;
     height: 700px;
@@ -175,7 +175,7 @@ body {
 
 #window .section4 #p2 {
     position: absolute;
-    top: 540px;
+    top: 580px;
     left: 80px;
     width: 1200px;
     height: 300px;
