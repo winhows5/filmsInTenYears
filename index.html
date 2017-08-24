@@ -44,8 +44,8 @@
         <div class="section section4">
             <div class="inner">
                 <p id="p1">From the previous chart, we can see that the box office is partially cyclical in its annual performance.In order to verify this conjecture, we calculated the box office data for 12 months a year and displayed on the left chart, there are
-                    10 lines from 2008 to 2017(the darker the line, the higher the year).<br>It is easy to see that in February, August and October each year, the box office has a wave of peaks.The reason for the speculation is that they are in the new
-                    year, summer vacation and national day respectively.</p>
+                    10 lines for all films from 2008 to 2017(the darker the line, the higher the year) and 10 lines for foreign films from 2008 to 2017(the lighter the line, the higher the year).<br>It is easy to see that in February, August and October
+                    each year, the box office has a wave of peaks.The reason for the speculation is that they are in the new year, summer vacation and national day respectively.</p>
                 <p id="p2">main data: cbooo.cn<br> contrasted by: Mtimes.com<br> corrected by: IMDb.com<br> Cover picture: shijue.me
                 </p>
             </div>
@@ -614,6 +614,96 @@
                     .datum(data)
                     .attr("fill", "none")
                     .attr("stroke", "#005555")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line9);
+            });
+
+            d3.csv("data/dataFmon.csv", function(d) {
+                d.date = parseTime(d.date);
+                return d;
+            }, function(error, data) {
+                console.log(data)
+                if (error) throw error;
+
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#555522")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line0);
+
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#666633")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line1);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#777744")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line2);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#888855")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line3);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#999966")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line4);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#aaaa77")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line5);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#bbbb88")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line6);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#cccc99")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line7);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#ddddaa")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line8);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#eeeebb")
                     .attr("stroke-linejoin", "round")
                     .attr("stroke-linecap", "round")
                     .attr("stroke-width", 1.5)
