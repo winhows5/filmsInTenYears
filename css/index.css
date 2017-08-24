@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'bodonixt';
     src: url('fonts/bodonixt.eot');
-    src: url('fonts/bodonixt.eot?#iefix') format('embedded-opentype'), url('fonts/bodonixt.woff') format('woff'), url('fonts/bodonixt.ttf') format('truetype');
+    src: url('fonts/bodonixt.eot?#iefix') format('embedded-opentype'), url('../fonts/bodonixt.woff') format('woff'), url('../fonts/bodonixt.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -9,7 +9,7 @@
 @font-face {
     font-family: 'bodonitown';
     src: url('fonts/bodonitown.eot');
-    src: url('fonts/bodonitown.eot?#iefix') format('embedded-opentype'), url('fonts/bodonitown.woff') format('woff'), url('fonts/bodonitown.ttf') format('truetype');
+    src: url('fonts/bodonitown.eot?#iefix') format('embedded-opentype'), url('../fonts/bodonitown.woff') format('woff'), url('../fonts/bodonitown.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -116,7 +116,7 @@ body {
     padding: 20px 40px 20px 40px;
     line-height: 120%;
     font-size: 20px;
-    font-family: bodonixt, serif, Times;
+    font-family: serif, Times;
     color: #cfcfcf;
 }
 
@@ -125,10 +125,23 @@ body {
     height: 700px;
     /* text-indent: 2em; */
     float: right;
-    padding: 120px 40px 20px 40px;
+    padding: 190px 40px 20px 40px;
     line-height: 120%;
     font-size: 21px;
-    font-family: bodonixt, serif, Times;
+    font-family: serif, Times;
+    color: #cfcfcf;
+}
+
+#window .section3 #p2 {
+    position: absolute;
+    top: 510px;
+    left: 80px;
+    width: 1200px;
+    height: 300px;
+    /* text-indent: 2em; */
+    line-height: 120%;
+    font-size: 21px;
+    font-family: serif, Times;
     color: #cfcfcf;
 }
 
@@ -140,31 +153,37 @@ body {
     text-transform: uppercase;
 } */
 
-#window .section4 h2 {
-    width: 577px;
-    height: 90px;
-    margin: 0 auto;
-    text-indent: -9999px;
-    background-image: url(/img/slider3_title.png);
+#window .section4 #svg {
+    position: absolute;
+    top: 20px;
+    left: 40px;
 }
 
 #window .section4 #p1 {
-    width: 540px;
+    position: absolute;
+    top: -80px;
+    right: 40px;
+    width: 400px;
     height: 700px;
-    /* text-indent: 2em; */
-    float: right;
-    padding: 120px 40px 20px 40px;
+    text-indent: 1.5em;
+    padding: 190px 40px 20px 40px;
     line-height: 120%;
     font-size: 21px;
-    font-family: bodonixt, serif, Times;
+    font-family: serif, Times;
     color: #cfcfcf;
 }
 
-#window .section4 .txt {
-    line-height: 30px;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 24px;
+#window .section4 #p2 {
+    position: absolute;
+    top: 540px;
+    left: 80px;
+    width: 1200px;
+    height: 300px;
+    /* text-indent: 2em; */
+    line-height: 120%;
+    font-size: 21px;
+    font-family: serif, Times;
+    color: #888888;
 }
 
 #window .section4 .fp-controlArrow {

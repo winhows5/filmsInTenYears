@@ -36,23 +36,21 @@
                 <p id="p1">The <i>Wolf Warriors Ⅱ</i> fiery patriotism ignited a collective release, at the same time people also cheered the domestic film breakthrough. We would like to take this opportunity to objectively judge the development of China's film
                     box office market from the data.<br> In the past ten years, domestic box office and non-domestic box office were shown on the left chart --box office by year.In spite of the increase in the amount, the proportion of domestic films
                     did not increase significantly on the ten year scale.<br> (data source:cbooo.cn, IMDb.com)</p>
-                <p id="p2"></p>
+                <p id="p2">At the total box office, all the box office grow over the previous year except in 2016, even in 2017 the data statistics only to August.At the same time, the domestic film box office ratio has been maintained at 50% up and down, as shown
+                    by the light orange line.<br>According to these data, wFrom these data, we conclude that the competitiveness of domestic films in China's box office market have not improved significantly.</p>
             </div>
         </div>
 
         <div class="section section4">
             <div class="inner">
-                <!-- <p id="p1">Many people question that some film introduction policies will unduly increase the proportion of domestic film box office, for example, known as the "domestic film protection month."". But as you can see from the chart, even after the
-                    decline in box office prices for non Chinese movies in the summer, the box office will continue to rise rapidly, with a slight decline in the domestic movie box office.<br>(data source:cbooo.cn, IMDb)</p>
-                <p id="p2"></p> -->
+                <p id="p1">From the previous chart, we can see that the box office is partially cyclical in its annual performance.In order to verify this conjecture, we calculated the box office data for 12 months a year and displayed on the left chart, there are
+                    10 lines from 2008 to 2017(the darker the line, the higher the year).<br>It is easy to see that in February, August and October each year, the box office has a wave of peaks.The reason for the speculation is that they are in the new
+                    year, summer vacation and national day respectively.</p>
+                <p id="p2">main data: cbooo.cn<br> contrasted by: Mtimes.com<br> corrected by: IMDb.com<br> Cover picture: shijue.me
+                </p>
             </div>
         </div>
-        <div class="section section5">
-            <div class="inner">
-                <p id="p1">Some mistakes still exist.<br></p>
-                <p id="p2"></p>
-            </div>
-        </div>
+
     </div>
 
     <script>
@@ -111,7 +109,7 @@
                     })
                     .selectAll("rect")
                     .data(function(d) {
-                        console.log(d)
+
                         return d;
                     })
                     .enter().append("rect")
@@ -405,122 +403,222 @@
 
     <script>
         $(function() {
-            var svg2 = d3.select(".section4 .inner").append("svg")
-                .attr("width", 960)
-                .attr("height", 500),
+            var svg = d3.select(".section4 .inner").append("svg")
+                .attr("width", 1000)
+                .attr("height", 450),
                 margin = {
-                    top: 20,
-                    right: 80,
+                    top: 90,
+                    right: 100,
                     bottom: 30,
-                    left: 50
+                    left: 140
                 },
-                width = svg2.attr("width") - margin.left - margin.right,
-                height = svg2.attr("height") - margin.top - margin.bottom,
-                g2 = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                width = svg.attr("width") - margin.left - margin.right,
+                height = svg.attr("height") - margin.top - margin.bottom,
+                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            var parseTime = d3.timeParse("%Y%m%d");
+            var parseTime = d3.timeParse("%m-%d");
 
-            var x = d3.scaleTime().range([0, width]),
-                y = d3.scaleLinear().range([height, 0]),
-                z = d3.scaleOrdinal(d3.schemeCategory10);
+            var x = d3.scaleTime()
+                .rangeRound([0, width]);
 
-            var line = d3.line()
+            var y = d3.scaleLinear()
+                .rangeRound([height, 0]);
+
+            // yli = ['2008', '2009', '2017']
+            var line0 = d3.line()
                 .curve(d3.curveBasis)
                 .x(function(d) {
                     return x(d.date);
                 })
                 .y(function(d) {
-                    return y(d.temperature);
+                    return y(d['2008']);
+                });
+            var line1 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2009']);
+                });
+            var line2 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2010']);
+                });
+            var line3 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2011']);
+                });
+            var line4 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2012']);
+                });
+            var line5 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2013']);
+                });
+            var line6 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2014']);
+                });
+            var line7 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2015']);
+                });
+            var line8 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2016']);
+                });
+            var line9 = d3.line()
+                .curve(d3.curveBasis)
+                .x(function(d) {
+                    return x(d.date);
+                })
+                .y(function(d) {
+                    return y(d['2017']);
                 });
 
-            d3.tsv("data/datamonths.csv", type, function(error, data) {
+
+            d3.csv("data/dataAmon.csv", function(d) {
+                d.date = parseTime(d.date);
+                return d;
+            }, function(error, data) {
+                console.log(data)
                 if (error) throw error;
-
-                var cities = data.columns.slice(1).map(function(id) {
-                    return {
-                        id: id,
-                        values: data.map(function(d) {
-                            return {
-                                date: d.date,
-                                temperature: d[id]
-                            };
-                        })
-                    };
-                });
 
                 x.domain(d3.extent(data, function(d) {
                     return d.date;
                 }));
+                y.domain([0, 350000]);
 
-                y.domain([
-                    d3.min(cities, function(c) {
-                        return d3.min(c.values, function(d) {
-                            return d.temperature;
-                        });
-                    }),
-                    d3.max(cities, function(c) {
-                        return d3.max(c.values, function(d) {
-                            return d.temperature;
-                        });
-                    })
-                ]);
-
-                z.domain(cities.map(function(c) {
-                    return c.id;
-                }));
-
-                g2.append("g")
-                    .attr("class", "axis axis--x")
+                g.append("g")
                     .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
+                    .attr("fill", "#cfcfcf")
+                    .call(d3.axisBottom(x))
+                    .attr("stroke", "#cfcfcf")
+                    .select(".domain")
+                    .remove();
 
-                g2.append("g")
-                    .attr("class", "axis axis--y")
+                g.append("g")
                     .call(d3.axisLeft(y))
+                    .attr("stroke", "#cfcfcf")
                     .append("text")
-                    .attr("transform", "rotate(-90)")
+                    .attr("fill", "#cfcfcf")
                     .attr("y", 6)
                     .attr("dy", "0.71em")
-                    .attr("fill", "#000")
-                    .text("Temperature, ºF");
+                    .attr("text-anchor", "end")
+                    .text("Box office(¥10,000)");
 
-                var city = g2.selectAll(".city")
-                    .data(cities)
-                    .enter().append("g")
-                    .attr("class", "city");
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#00eeee")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line0);
 
-                city.append("path")
-                    .attr("class", "line")
-                    .attr("d", function(d) {
-                        return line(d.values);
-                    })
-                    .style("stroke", function(d) {
-                        return z(d.id);
-                    });
-
-                city.append("text")
-                    .datum(function(d) {
-                        return {
-                            id: d.id,
-                            value: d.values[d.values.length - 1]
-                        };
-                    })
-                    .attr("transform", function(d) {
-                        return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
-                    })
-                    .attr("x", 3)
-                    .attr("dy", "0.35em")
-                    .style("font", "10px sans-serif")
-                    .text(function(d) {
-                        return d.id;
-                    });
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#00dddd")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line1);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#00cccc")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line2);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#00bbbb")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line3);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#00aaaa")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line4);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#009999")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line5);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#008888")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line6);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#007777")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line7);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#006666")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line8);
+                g.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "#005555")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line9);
             });
-
-            function type(d, _, columns) {
-                d.date = parseTime(d.date);
-                for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
-                return d;
-            }
         });
     </script>
 
