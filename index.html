@@ -1,768 +1,114 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Winhows5">
-    <meta name="copyright" content="©2009-2017 Winhows5. All rights reserved.">
+    <meta name="copyright" content="©2017-2026 Winhows5. All rights reserved.">
     <title>FilmsInTenYears</title>
-    <link rel="icon" href="img/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/jquery.fullPage.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/d3.css">
 
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/jquery.fullPage.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="icon" type="image/png" href="/img/icon.png">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-    <div id="window">
-        <div class="section section1">
-            <div class="bg"> </div>
-        </div>
-        <div class="section section2">
-            <div class="inner">
-                <p id="p1">In the past ten years, numerous outstanding domestic and foreign films have sprung up in the Chinese film market. In order to observe the characteristics of the movie market, the chart was drawn to show the box office per ten days of every
-                    film in every year between 2008 to 2017(data source:cbooo.cn, IMDb.com). As a whole, the box office market shows obvious periodicity and growth trend. More details will be discussed below.<br>(It should be noted that the data for 2017
-                    ended August 20th)</p>
+    <div class="container-fluid cover">
+        <img class="img-fluid screenshot" id="screenshot" src="img/bg-title.jpg" />
+    </div>
+
+    <div class="container-fluid odd" id="section1">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead">
+                    In the past ten years, numerous outstanding domestic and foreign films have sprung up in the Chinese film market. In order to observe the characteristics of the movie market, the chart was drawn to show the box office per ten days of every film in every
+                    year between 2008 to 2017(data source:cbooo.cn, IMDb.com). As a whole, the box office market shows obvious periodicity and growth trend. More details will be discussed below.<br>(It should be noted that the data
+                    for 2017 ended August 20th)</p>
             </div>
         </div>
-
-        <div class="section section3">
-            <div class="inner">
-                <p id="p1">The <i>Wolf Warriors Ⅱ</i> fiery patriotism ignited a collective release, at the same time people also cheered the domestic film breakthrough. We would like to take this opportunity to objectively judge the development of China's film
-                    box office market from the data.<br> In the past ten years, domestic box office and non-domestic box office were shown on the left chart --box office by year.In spite of the increase in the amount, the proportion of domestic films
-                    did not increase significantly on the ten year scale.<br> (data source:cbooo.cn, IMDb.com)</p>
-                <p id="p2">At the total box office, all the box office grow over the previous year except in 2016, even in 2017 the data statistics only to August.At the same time, the domestic film box office ratio has been maintained at 50% up and down, as shown
-                    by the light orange line.<br>According to these data, wFrom these data, we conclude that the competitiveness of domestic films in China's box office market have not improved significantly.</p>
-            </div>
-        </div>
-
-        <div class="section section4">
-            <div class="inner">
-                <p id="p1">From the previous chart, we can see that the box office is partially cyclical in its annual performance.In order to verify this conjecture, we calculated the box office data for 12 months a year and displayed on the left chart, there are
-                    10 lines for all films from 2008 to 2017(the darker the line, the higher the year) and 10 lines for foreign films from 2008 to 2017(the lighter the line, the higher the year).<br>It is easy to see that in February, August and October
-                    each year, the box office has a wave of peaks.The reason for the speculation is that they are in the new year, summer vacation and national day respectively.</p>
-                <p id="p2">main data: cbooo.cn<br> contrasted by: Mtimes.com<br> corrected by: IMDb.com<br> Cover picture: shijue.me
-                </p>
+        <div class="row">
+            <div class="col-md-12 chart0-bar">
             </div>
         </div>
 
     </div>
 
-    <script>
-        $(function() {
-            $('#window').fullpage({
-                navigation: false
-            });
-        });
-    </script>
+    <div class="container-fluid even" id="section2">
+        <div class="container">
+            <div class="row">
+                <div calss="col-md-12">
+                    <h3>It's about your preferences.</h3>
+                    <p class="lead">The <i>Wolf Warriors Ⅱ</i> fiery patriotism ignited a collective release, at the same time people also cheered the domestic film breakthrough. We would like to take this opportunity to objectively judge the development of China's film
+                        box office market from the data.<br> In the past ten years, domestic box office and non-domestic box office were shown on the left chart --box office by year.In spite of the increase in the amount, the proportion of domestic films
+                        did not increase significantly on the ten year scale.<br> (data source:cbooo.cn, IMDb.com)</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 chart1-bar">
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <p class="lead"><br>At the total box office, all the box office grow over the previous year except in 2016, even in 2017 the data statistics only to August.At the same time, the domestic film box office ratio has been maintained at 50% up and down,
+                        as shown by the light orange line.<br>According to these data, wFrom these data, we conclude that the competitiveness of domestic films in China's box office market have not improved significantly.</p>
+                </div>
+            </div>
 
-    <script>
-        $(function() {
-            width = 1400
-            height = 560
-            var svg = d3.select(".section2 .inner").append("svg")
-                .attr("id", "svg0")
-                .attr("width", width)
-                .attr("height", height),
-                margin = {
-                    top: 30,
-                    right: 100,
-                    bottom: 30,
-                    left: 100
-                },
-                width = +svg.attr("width") - margin.left - margin.right,
-                height = +svg.attr("height") - margin.top - margin.bottom,
-                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        </div>
+    </div>
 
-            var parseTime = d3.timeParse("%Y-%m-%d");
-            var x = d3.scaleTime()
-                .rangeRound([0, width])
+    <div class="container-fluid odd" id="section3">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Free & Open Source. It's ours.</h3>
+                <p class="lead">
+                    From the previous chart, we can see that the box office is partially cyclical in its annual performance.In order to verify this conjecture, we calculated the box office data for 12 months a year and displayed on the left chart, there are 10 lines for
+                    all films from 2008 to 2017(the darker the line, the higher the year) and 10 lines for foreign films from 2008 to 2017(the lighter the line, the higher the year).<br>It is easy to see that in February, August and
+                    October each year, the box office has a wave of peaks.The reason for the speculation is that they are in the new year, summer vacation and national day respectively.</p>
+            </div>
+            <div class="col-md-7 col-md-offset-1 chart2-line">
+                <p id="menu">Select years: <select>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>  
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option></select>
 
-            var y = d3.scaleLinear()
-                .rangeRound([height, 0]);
-
-            var z = d3.scaleOrdinal()
-                .range(["#6699ff", "#6b486b", "#98abc5", "#ccff66", "#CDAF95", "#E9967A", "#6b486b", "#6b486b", "#6b486b"]);
-
-            d3.csv("data/dataF.csv", function(d) {
-                d.date = parseTime(d.date);
-                return d;
-            }, function(error, data) {
-                if (error) throw error;
-                var keys = data.columns.slice(1);
-                x.domain(d3.extent(data, function(d) {
-                    return d.date;
-                }));
-                y.domain([-300000, +300000]);
-                z.domain(keys);
-                g.append("g")
-                    .selectAll("g")
-                    .data(d3.stack().keys(keys)(data))
-                    .enter().append("g")
-                    .attr("fill", function(d) {
-                        return z(d.key);
-                    })
-                    .selectAll("rect")
-                    .data(function(d) {
-
-                        return d;
-                    })
-                    .enter().append("rect")
-                    .attr("x", function(d) {
-                        return x(d.data.date);
-                    })
-                    .attr("y", function(d) {
-                        return y(1 + d[1]);
-                    })
-                    .attr("height", function(d) {
-                        return (y(1 + d[0]) - y(1 + d[1]));
-                    })
-                    .attr("width", 1.5);
-
-                g.append("g")
-                    .attr("class", "axis")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x))
-                    .attr("stroke", "#cfcfcf")
-                    .select('.domain')
-                    .remove();
-
-                g.append("g")
-                    .attr("class", "axis")
-                    .attr("stroke", "#cfcfcf")
-                    .call(d3.axisLeft(y).ticks(null, "s"))
-                    .append("text")
-                    .attr("x", 2)
-                    .attr("y", y(y.ticks().pop()) + 0.5)
-                    .attr("dy", "0.32em")
-                    .attr("fill", "#cccccc")
-                    .attr("text-anchor", "start")
-                    .text("Box office(¥10,000)");
-            })
-
-            var z2 = d3.scaleOrdinal()
-                .range(["#ff8c00", "#ffcc66", "#ffffcc"]);
-            d3.csv("data/dataC.csv", function(d) {
-                d.date = parseTime(d.date);
-                return d;
-            }, function(error, data) {
-                if (error) throw error;
-                var keys = data.columns.slice(1);
-                x.domain(d3.extent(data, function(d) {
-                    return d.date;
-                }));
-                y.domain([-300000, +300000]);
-                z2.domain(keys);
-                d3.select("#svg0 g").append("g")
-                    .selectAll("g")
-                    .data(d3.stack().keys(keys)(data))
-                    .enter().append("g")
-                    .attr("fill", function(d) {
-                        return z2(d.key);
-                    })
-                    .selectAll("rect")
-                    .data(function(d) {
-                        return d;
-                    })
-                    .enter().append("rect")
-                    .attr("x", function(d) {
-                        return x(d.data.date);
-                    })
-                    .attr("y", function(d) {
-                        return y(-1 - d[1]) - (y(1 + d[0]) - y(1 + d[1]));
-                    })
-                    .attr("height", function(d) {
-                        return (y(1 + d[0]) - y(1 + d[1]));
-                    })
-                    .attr("width", 1);
-            })
-        })
-    </script>
-    <script>
-        $(function() {
-            width = 800
-            height = 450
-            var svg = d3.select(".section3 .inner").append("svg")
-                .attr("id", "svg1")
-                .attr("width", width)
-                .attr("height", height),
-                margin = {
-                    top: 90,
-                    right: 200,
-                    bottom: 30,
-                    left: 140
-                },
-                width = +svg.attr("width") - margin.left - margin.right,
-                height = +svg.attr("height") - margin.top - margin.bottom,
-                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            var x = d3.scaleBand()
-                .rangeRound([0, width])
-                .paddingInner(0.2)
-                .align(0.1);
-
-            var y = d3.scaleLinear()
-                .rangeRound([height, 0]);
-
-            var yLine = d3.scaleLinear()
-                .rangeRound([height, 0]);
-
-            var z = d3.scaleOrdinal()
-                .range(["#6b486b", "#ff8c00", "#98abc5"]);
-
-            var line = d3.line()
-                .x(function(d) {
-                    return x(d.year);
-                })
-                .y(function(d) {
-                    return yLine(d.China / (d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0));
-                });
-            // var zrate = 9999999999
-            // var linerate = d3.line()
-            //     .x(function(d) {
-            //         return x(d.year);
-            //     })
-            //     .y(function(d) {
-            //         console.log([(d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0), zrate])
-            //         rate = yLine(((d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0) - zrate) / zrate)
-            //         zrate = d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0
-            //         return rate;
-            //     });
-
-            d3.csv("data/datayears.csv", function(error, data) {
-                if (error) throw error;
-                var keys = data.columns.slice(2);
-                x.domain(data.map(function(d) {
-                    return d.year;
-                }));
-                y.domain([-d3.max(data, function(d) {
-                    return d.foreign * 1.0;
-                }), d3.max(data, function(d) {
-                    return d.foreign * 1.0;
-                })]).nice();
-                z.domain(keys);
-                g.append("g")
-                    .selectAll("g")
-                    .data(d3.stack().keys(keys)(data))
-                    .enter().append("g")
-                    .attr("fill", function(d) {
-                        return z(d.key);
-                    })
-                    .selectAll("rect")
-                    .data(function(d) {
-                        return d;
-                    })
-                    .enter().append("rect")
-                    .attr("x", function(d) {
-                        return x(d.data.year);
-                    })
-                    .attr("y", function(d) {
-                        return y(+d[1]);
-                    })
-                    .attr("height", function(d) {
-                        return (y(+d[0]) - y(+d[1]));
-                    })
-                    .attr("width", 20);
-                var keys2 = data.columns.slice(1, 2);
-                d3.select("#svg1 g").append("g")
-                    .selectAll("g")
-                    .data(d3.stack().keys(keys2)(data))
-                    .enter().append("g")
-                    .attr("fill", function(d) {
-                        return z(d.key);
-                    })
-                    .selectAll("rect")
-                    .data(function(d) {
-                        return d;
-                    })
-                    .enter().append("rect")
-                    .attr("x", function(d) {
-                        return x(d.data.year);
-                    })
-                    .attr("y", function(d) {
-                        return y(0);
-                    })
-                    .attr("height", function(d) {
-                        return (y(-d[1]) - y(d[0]));
-                    })
-                    .attr("width", 20);
-                yLine.domain([0, 1]);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("stroke", "#EECFA1")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line);
-                // g.append("path")
-                //     .datum(data)
-                //     .attr("fill", "none")
-                //     .attr("stroke", "#EECFA1")
-                //     .attr("stroke-linejoin", "round")
-                //     .attr("stroke-linecap", "round")
-                //     .attr("stroke-width", 1.5)
-                //     .attr("d", linerate);
-
-                g.append("g")
-                    .attr("class", "axis")
-                    .attr("stroke", "#cfcfcf")
-                    .attr("transform", "translate(" + width + "," + 0 + ")")
-                    .call(d3.axisRight(yLine))
-                    .append("text")
-                    .attr("fill", "#cfcfcf")
-                    .attr("x", 2)
-                    .attr("y", y(y.ticks().pop()) + 0.5)
-                    .attr("dy", "0.71em")
-                    .attr("text-anchor", "end")
-                    .text("Percent");
+            </div>
+        </div>
+    </div>
 
 
-                g.append("g")
-                    .attr("class", "axis")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x))
-                    .attr("stroke", "#cfcfcf");
-
-                g.append("g")
-                    .attr("class", "axis")
-                    .attr("stroke", "#cfcfcf")
-                    .call(d3.axisLeft(y).ticks(null, "s"))
-                    .append("text")
-                    .attr("x", 2)
-                    .attr("y", y(y.ticks().pop()) + 0.5)
-                    .attr("dy", "0.32em")
-                    .attr("fill", "#cccccc")
-                    .attr("text-anchor", "start")
-                    .text("Box office(¥10,000)");
-
-                var legend = g.append("g")
-                    .attr("font-family", "sans-serif")
-                    .attr("font-size", 12)
-                    .attr("text-anchor", "end")
-                    .selectAll("g")
-                    .data(keys.concat(keys2).slice().reverse())
-                    .enter().append("g")
-                    .attr("transform", function(d, i) {
-                        return "translate(" + margin.right * 0.75 + "," + (i * 30) + ")";
-                    });
-
-                legend.append("rect")
-                    .attr("x", width - 19)
-                    .attr("y", 20)
-                    .attr("width", 19)
-                    .attr("height", 19)
-                    .attr("fill", z);
-
-                legend.append("text")
-                    .attr("x", width - 24)
-                    .attr("y", 29)
-                    .attr("dy", "0.32em")
-                    .attr("fill", "#bfbfbf")
-                    .text(function(d) {
-                        return d;
-                    });
-
-                var legendLine = g.append("g")
-                    .attr("font-family", "sans-serif")
-                    .attr("font-size", 12)
-                    .attr("text-anchor", "end")
-                    .selectAll("g")
-                    .data(["domestic percent"])
-                    .enter().append("g")
-                    .attr("transform", function(d, i) {
-                        return "translate(" + margin.right * 0.75 + "," + (i * 30 + 90) + ")";
-                    });
-
-                legendLine.append("rect")
-                    .attr("x", width - 19)
-                    .attr("y", 28)
-                    .attr("width", 19)
-                    .attr("height", 2)
-                    .attr("fill", function(d) {
-                        if (d == "domestic percent") return "#EECFA1";
-                        else return "#C1FFC1";
-                    });
-
-                legendLine.append("text")
-                    .attr("x", width - 24)
-                    .attr("y", 29)
-                    .attr("dy", "0.32em")
-                    .attr("fill", "#bfbfbf")
-                    .text(function(d) {
-                        return d;
-                    });
-            });
-        })
-    </script>
-
-    <script>
-        $(function() {
-            var svg = d3.select(".section4 .inner").append("svg")
-                .attr("width", 1000)
-                .attr("height", 450),
-                margin = {
-                    top: 90,
-                    right: 100,
-                    bottom: 30,
-                    left: 140
-                },
-                width = svg.attr("width") - margin.left - margin.right,
-                height = svg.attr("height") - margin.top - margin.bottom,
-                g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            var parseTime = d3.timeParse("%m-%d");
-
-            var x = d3.scaleTime()
-                .rangeRound([0, width]);
-
-            var y = d3.scaleLinear()
-                .rangeRound([height, 0]);
-
-            // yli = ['2008', '2009', '2017']
-            var line0 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2008']);
-                });
-            var line1 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2009']);
-                });
-            var line2 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2010']);
-                });
-            var line3 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2011']);
-                });
-            var line4 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2012']);
-                });
-            var line5 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2013']);
-                });
-            var line6 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2014']);
-                });
-            var line7 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2015']);
-                });
-            var line8 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2016']);
-                });
-            var line9 = d3.line()
-                .curve(d3.curveCardinal)
-                .x(function(d) {
-                    return x(d.date);
-                })
-                .y(function(d) {
-                    return y(d['2017']);
-                });
+    <div class="container-fluid footer">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-0">
+                Copyright <a href="https://github.com/winhows5" target="_blank">Winhows5</a> &copy; 2017.
+            </div>
+        </div>
+    </div>
 
 
-            d3.csv("data/dataAmon.csv", function(d) {
-                d.date = parseTime(d.date);
-                return d;
-            }, function(error, data) {
-                console.log(data)
-                if (error) throw error;
 
-                x.domain(d3.extent(data, function(d) {
-                    return d.date;
-                }));
-                y.domain([0, 350000]);
-
-                g.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .attr("fill", "#cfcfcf")
-                    .call(d3.axisBottom(x))
-                    .attr("stroke", "#cfcfcf")
-                    .select(".domain")
-                    .remove();
-
-                g.append("g")
-                    .call(d3.axisLeft(y))
-                    .attr("stroke", "#cfcfcf")
-                    .append("text")
-                    .attr("transform", "translate(0," + -20 + ")")
-                    .attr("fill", "#cfcfcf")
-                    .attr("dy", "0.71em")
-                    .attr("text-anchor", "end")
-                    .text("Box office(¥10,000)");
-
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("stroke", "#00eeee")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line0);
-
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#00dddd")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line1);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#00cccc")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line2);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#00bbbb")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line3);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#00aaaa")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line4);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#009999")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line5);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#008888")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line6);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#007777")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line7);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#006666")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line8);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#005555")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line9);
-            });
-
-            d3.csv("data/dataFmon.csv", function(d) {
-                d.date = parseTime(d.date);
-                return d;
-            }, function(error, data) {
-                console.log(data)
-                if (error) throw error;
-
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#555522")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line0);
-
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#666633")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line1);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#777744")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line2);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#888855")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line3);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#999966")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line4);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#aaaa77")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line5);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#bbbb88")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line6);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#cccc99")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line7);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#ddddaa")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line8);
-                g.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("opacity", 0.6)
-                    .attr("stroke", "#eeeebb")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", line9);
-
-
-                var legendLine = g.append("g")
-                    .attr("font-family", "sans-serif")
-                    .attr("font-size", 12)
-                    .attr("text-anchor", "end")
-                    .selectAll("g")
-                    .data(["all films", "foreign films"])
-                    .enter().append("g")
-                    .attr("transform", function(d, i) {
-                        return "translate(" + 0 + "," + (i * 30 + 90) + ")";
-                    });
-
-                legendLine.append("rect")
-                    .attr("x", width - 19)
-                    .attr("y", 28)
-                    .attr("width", 19)
-                    .attr("height", 2)
-                    .attr("fill", function(d) {
-                        if (d == "all films") return "#00eeee";
-                        else return "#eeeebb";
-                    });
-
-                legendLine.append("text")
-                    .attr("x", width - 24)
-                    .attr("y", 29)
-                    .attr("dy", "0.32em")
-                    .attr("fill", "#bfbfbf")
-                    .text(function(d) {
-                        return d;
-                    });
-            });
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
 
 </body>
+
+<script src="js/chart0-bar.js"></script>
+<script src="js/chart1-bar.js"></script>
+<script src="js/chart2-t.js"></script>
 
 </html>

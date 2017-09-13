@@ -4,6 +4,7 @@ $(function() {
         .append("div")
         .classed("svg-container", true)
         .append("svg")
+        .attr("id", "svg0")
         .attr("preserveAspectRatio", "xMidYMid meet")
         .attr("viewBox", "0 0 1400 560")
         .attr("width", 1400)
@@ -24,7 +25,8 @@ $(function() {
         .rangeRound([0, width])
 
     var y = d3.scaleLinear()
-        .rangeRound([height, 0]);
+        .rangeRound([height, 0])
+        .domain([-350000, +250000]);
 
     var z = d3.scaleOrdinal()
         .range(["#6699ff", "#6b486b", "#98abc5", "#ccff66", "#CDAF95", "#E9967A", "#6b486b", "#6b486b", "#6b486b"]);
@@ -38,7 +40,6 @@ $(function() {
         x.domain(d3.extent(data, function(d) {
             return d.date;
         }));
-        y.domain([-300000, +300000]);
         z.domain(keys);
         g.append("g")
             .selectAll("g")
@@ -71,18 +72,51 @@ $(function() {
             .attr("stroke", "#cfcfcf")
             .select('.domain')
             .remove();
-
+        var yAxis = d3.axisLeft(y).ticks(null, "s").tickFormat(function(d) { return Math.abs(d / 1000) + "k"; });
         g.append("g")
             .attr("class", "axis")
             .attr("stroke", "#cfcfcf")
-            .call(d3.axisLeft(y).ticks(null, "s"))
+            .call(yAxis)
             .append("text")
             .attr("x", 2)
-            .attr("y", y(y.ticks().pop()) + 0.5)
+            .attr("y", y(y.ticks().pop()) - 20)
             .attr("dy", "0.32em")
             .attr("fill", "#cccccc")
+            .attr("text-anchor", "end")
+            .text("Box(¥10,000)");
+        g.append("g")
+            .attr("class", "bg-label")
+            .append("text")
+            .attr("x", 10)
+            .attr("y", height - 30)
+            .attr("fill", "#aaa")
             .attr("text-anchor", "start")
-            .text("Box office(¥10,000)");
+            .text("China films");
+        g.append("g")
+            .attr("class", "bg-label")
+            .append("text")
+            .attr("x", 10)
+            .attr("y", 50)
+            .attr("fill", "#aaa")
+            .attr("text-anchor", "start")
+            .text("Foreign films");
+        g.append("g")
+            .attr("class", "legend")
+            .append("text")
+            .attr("x", width - 10)
+            .attr("y", 20)
+            .attr("fill", "#aaa")
+            .attr("text-anchor", "end")
+            .text("*a bar means the box offices per ten days");
+        g.append("g")
+            .attr("class", "legend")
+            .append("text")
+            .attr("x", width - 10)
+            .attr("y", 32)
+            .attr("fill", "#aaa")
+            .attr("text-anchor", "end")
+            .text("*different color means different film at the same bar");
+
     })
 
     var z2 = d3.scaleOrdinal()
@@ -96,7 +130,6 @@ $(function() {
         x.domain(d3.extent(data, function(d) {
             return d.date;
         }));
-        y.domain([-300000, +300000]);
         z2.domain(keys);
         d3.select("#svg0 g").append("g")
             .selectAll("g")

@@ -29,7 +29,7 @@ $(function() {
         .rangeRound([height, 0]);
 
     var z = d3.scaleOrdinal()
-        .range(["#6b486b", "#ff8c00", "#98abc5"]);
+        .range(["#6b486b", "#98abc5", "#ff8c00"]);
 
     var line = d3.line()
         .x(function(d) {
@@ -38,17 +38,6 @@ $(function() {
         .y(function(d) {
             return yLine(d.China / (d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0));
         });
-    // var zrate = 9999999999
-    // var linerate = d3.line()
-    //     .x(function(d) {
-    //         return x(d.year);
-    //     })
-    //     .y(function(d) {
-    //         console.log([(d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0), zrate])
-    //         rate = yLine(((d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0) - zrate) / zrate)
-    //         zrate = d.China * 1.0 + d.foreign * 1.0 + d.cooperation * 1.0
-    //         return rate;
-    //     });
 
     d3.csv("data/datayears.csv", function(error, data) {
         if (error) throw error;
@@ -116,14 +105,6 @@ $(function() {
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", line);
-        // g.append("path")
-        //     .datum(data)
-        //     .attr("fill", "none")
-        //     .attr("stroke", "#EECFA1")
-        //     .attr("stroke-linejoin", "round")
-        //     .attr("stroke-linecap", "round")
-        //     .attr("stroke-width", 1.5)
-        //     .attr("d", linerate);
 
         g.append("g")
             .attr("class", "axis")
@@ -133,7 +114,7 @@ $(function() {
             .append("text")
             .attr("fill", "#cfcfcf")
             .attr("x", 2)
-            .attr("y", y(y.ticks().pop()) + 0.5)
+            .attr("y", y(y.ticks().pop()) - 15)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
             .text("Percent");
@@ -151,7 +132,7 @@ $(function() {
             .call(d3.axisLeft(y).ticks(null, "s"))
             .append("text")
             .attr("x", 2)
-            .attr("y", y(y.ticks().pop()) + 0.5)
+            .attr("y", y(y.ticks().pop()) - 10)
             .attr("dy", "0.32em")
             .attr("fill", "#cccccc")
             .attr("text-anchor", "start")
