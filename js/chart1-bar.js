@@ -124,7 +124,8 @@ $(function() {
             .attr("class", "axis")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x))
-            .attr("stroke", "#cfcfcf");
+            .select('.domain')
+            .remove();;
 
         g.append("g")
             .attr("class", "axis")

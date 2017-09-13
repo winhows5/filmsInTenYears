@@ -29,7 +29,7 @@ $(function() {
         .domain([-350000, +250000]);
 
     var z = d3.scaleOrdinal()
-        .range(["#6699ff", "#6b486b", "#98abc5", "#ccff66", "#CDAF95", "#E9967A", "#6b486b", "#6b486b", "#6b486b"]);
+        .range(["#7EC0EE", "#98abc5", "#B2DFEE", "#A2B5CD", "#CAE1FF"]);
 
     d3.csv("data/dataF.csv", function(d) {
         d.date = parseTime(d.date);
@@ -75,13 +75,13 @@ $(function() {
         var yAxis = d3.axisLeft(y).ticks(null, "s").tickFormat(function(d) { return Math.abs(d / 1000) + "k"; });
         g.append("g")
             .attr("class", "axis")
-            .attr("stroke", "#cfcfcf")
+            .attr("fill", "#cfcfcf")
             .call(yAxis)
             .append("text")
             .attr("x", 2)
             .attr("y", y(y.ticks().pop()) - 20)
             .attr("dy", "0.32em")
-            .attr("fill", "#cccccc")
+            .attr("fill", "#ccc")
             .attr("text-anchor", "end")
             .text("Box(¥10,000)");
         g.append("g")
@@ -120,7 +120,7 @@ $(function() {
     })
 
     var z2 = d3.scaleOrdinal()
-        .range(["#ff8c00", "#ffcc66", "#ffffcc"]);
+        .range(["#ff8c00", "#ffcc66", "#ffffcc", "#CDBE70", "#CDAF95"]);
     d3.csv("data/dataC.csv", function(d) {
         d.date = parseTime(d.date);
         return d;

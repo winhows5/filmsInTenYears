@@ -7,10 +7,10 @@ $(function() {
         .attr("preserveAspectRatio", "xMidYMid meet")
         .attr("viewBox", "0 0 1000 450"),
         margin = {
-            top: 40,
-            right: 40,
+            top: 60,
+            right: 90,
             bottom: 30,
-            left: 40
+            left: 60
         },
         width = +1000 - margin.left - margin.right,
         height = +450 - margin.top - margin.bottom,
@@ -55,6 +55,7 @@ $(function() {
     function change() {
 
         clearTimeout(timeout);
+
         d3.transition()
             .duration(altKey ? 7500 : 1500)
             .each(redraw);
@@ -117,7 +118,7 @@ $(function() {
         ]);
 
 
-        var country = svg.selectAll(".country")
+        var country = g.selectAll(".country")
             .data(transpose);
 
         var countryEnter = country.enter().append("g")
@@ -132,13 +133,14 @@ $(function() {
                 return line(d.values);
             })
             .style("stroke", function(d) {
-                if (d.name == "all")
+                if (d.name == "whole box")
                     return color[0];
                 else return color[1];
             });
 
         countryEnter.append("text")
             .attr("class", "names")
+            .attr("fill", "#ccc")
             .datum(function(d) {
                 return {
                     name: d.name,
@@ -154,7 +156,7 @@ $(function() {
                 return d.name;
             });
         var t = d3.transition()
-            .duration(1500)
+            .duration(1000)
         country.transition(t)
             .select("path")
             .attr("d", function(d) {
@@ -167,64 +169,34 @@ $(function() {
                 return "translate(" + x(d.values[d.values.length - 1].date) + "," + y(d.values[d.values.length - 1].stat) + ")";
             });
 
-        d3.transition(svg).select(".y.axis")
+        d3.transition(g).select(".y.axis")
             .call(d3.axisLeft(y));
 
         var xAxis = d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(function(d) {
             return String(d).slice(4, 7);
         });
         g.append("g")
+            .attr("class", "axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .attr("stroke", "#cfcfcf")
             .select(".domain")
             .remove();
 
-        var yAxis = d3.axisLeft(y).ticks(6)
-        svg.append("svg:g")
+        var yAxis = d3.axisLeft(y).ticks(null, "s")
+        g.append("svg:g")
             .attr("class", "yAxis");
-        d3.transition(svg).select(".yAxis")
+        d3.transition(g).select(".yAxis")
             .call(yAxis)
+            .attr("stroke", "#cfcfcf")
 
         g.append("g")
             .append("text")
-            .attr("stroke", "#cfcfcf")
+            .attr("fill", "#cfcfcf")
             .attr("transform", "translate(10, -40)")
             .attr("dy", "1em")
-            .attr("text-anchor", "end")
-            .text("Box(¥10,000)")
-            .transition(svg);
-
-
-        var legendLine = g.append("g")
-            .attr("font-family", "sans-serif")
-            .attr("font-size", 12)
-            .attr("text-anchor", "end")
-            .selectAll("g")
-            .data(["all films", "foreign films"])
-            .enter().append("g")
-            .attr("transform", function(d, i) {
-                return "translate(" + 0 + "," + (i * 30) + ")";
-            });
-
-        legendLine.append("rect")
-            .attr("x", width + 25)
-            .attr("y", 0)
-            .attr("width", 19)
-            .attr("height", 2)
-            .attr("fill", function(d) {
-                if (d == "all films") return "#B4EEB4";
-                else return "#98abc5";
-            });
-
-        legendLine.append("text")
-            .attr("x", width + 24)
-            .attr("y", 0)
-            .attr("dy", "0.32em")
-            .attr("fill", "#bfbfbf")
-            .text(function(d) {
-                return d;
-            });
+            .attr("text-anchor", "start")
+            .text("Box(¥10,000)");
 
     }
 

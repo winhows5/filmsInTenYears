@@ -10,8 +10,15 @@
 }
 
 .axis text {
+    fill: #ccc;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
+}
+
+.yAxis text {
+    fill: #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }
 
 .bg-label text {
@@ -23,5 +30,10 @@
 .line {
     fill: none;
     stroke: steelblue;
-    stroke-width: 1.5px;
+    stroke-width: 3px;
+}
+
+.names {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
 }

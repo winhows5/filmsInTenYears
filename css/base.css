@@ -23,9 +23,35 @@
     padding: 5%
 }
 
+.odd p {
+    font-family: bodonitown;
+    color: #aaa;
+}
+
+.odd h3 {
+    font-family: Georgia, serif;
+    ;
+    color: #aaa;
+}
+
 .even {
     background: #222;
     padding: 5%
+}
+
+.even p {
+    font-family: bodonitown;
+    color: #999;
+}
+
+.even h3 {
+    font-family: Georgia, serif;
+    color: #999;
+}
+
+.li {
+    font-size: 20px;
+    line-height: 10px;
 }
 
 .footer {
