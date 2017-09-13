@@ -37,7 +37,7 @@ $(function() {
     var num = 1;
     var menu = d3.select("#menu select")
         .on("change", change);
-    d3.csv("/data/datamon.csv", function(d) {
+    d3.csv("data/datamon.csv", function(d) {
         countries = d;
         redraw();
     });
